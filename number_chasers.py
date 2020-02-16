@@ -2,30 +2,28 @@ import operator
 import random
 
 # optimal = random.randint(0, 10000)
-optimal = 5000
-dna_size = 20
+optimal = 100
+dna_size = 5
 pop_size = 20
-generations = 200
-dna_integer = 5
+generations = 4
+dna_integer = 2
 
-def generate_operator(gene, answer, dna_integer):
+def generate_operator(gene, operand, dna_integer):
     # ----
     # Converts genes into their corresponding operators
     # ----
-    a = answer
-    b = dna_integer
-    operator_dict = {0: {'operator': operator.add(a, b),
+    operator_dict = {0: {'operator': operator.add(operand, dna_integer),
                          'representation': '+'},
-                     1: {'operator': operator.sub(a, b),
+                     1: {'operator': operator.sub(operand, dna_integer),
                          'representation': '-'},
-                     2: {'operator': operator.mul(a, b),
+                     2: {'operator': operator.mul(operand, dna_integer),
                          'representation': '*'},
-                     3: {'operator': operator.floordiv(a, b),
+                     3: {'operator': operator.truediv(operand, dna_integer),
                          'representation': '/'}}
     return operator_dict[gene]['operator']
 
 def evaluate_fitness(population):
-    answer = 0
+    answer = 0.0
     fitness_values = list()
     for dna in population:
         for i in dna:
@@ -60,13 +58,20 @@ def mutate(population):
     # the gene pool.
     # ----
     mutation_chance = 50
-    new_dna = list()
+    new_population = list()
     for dna in population:
+        print(dna)
+        new_dna = list()
         for i in dna:
-            if int(random.random()*mutation_chance) == 1:
-                new_dna = random.randrange(0, 4)
+            if int(random.randint(0, mutation_chance)) == 1:
+                new_dna.append(random.randrange(0, 4))
             else:
-                new_dna = dna[i]
+                print(i)
+                new_dna.append(i)
+            print(new_dna)
+        new_population.append(new_dna)
+    population = new_population
+
 
     return population
 

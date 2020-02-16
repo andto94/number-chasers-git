@@ -10,13 +10,13 @@ def generate_operator(gene, answer, dna_integer):
                          'representation': '-'},
                      2: {'operator': operator.mul(a, b),
                          'representation': '*'},
-                     3: {'operator': operator.floordiv(a, b),
+                     3: {'operator': operator.truediv(a, b),
                          'representation': '/'}}
     return operator_dict[gene]['operator']
 
-random_line = [0, 1, 0, 2, 3, 0, 1, 1, 3, 3, 0, 2, 0, 0, 1, 3, 1, 1, 3, 1]
+random_line = [1, 2, 0, 0, 0]
 
-answer = 0
+answer = 0.0
 dna_integer = 3
 optimal = 5000
 for i in random_line:
